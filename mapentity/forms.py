@@ -102,13 +102,26 @@ class MapEntityForm(TranslatedModelForm):
         self.fields['model'] = forms.Field(required=False, widget=forms.Field.hidden_widget,
                                            initial=self.instance._meta.module_name)
 
-        # Default widgets
+        self._init_widgets()
+        self._init_layout()
+
+    def get_form_model(self):
+        return self._meta.model
+
+    def can_edit_geometry(self):
+        if self.user:
+            return user_has_perm(self.user, '')
+        return False
+
+    def _init_widgets(self):
+        """ Setup default widgets for maps and rich text fields.
+        Custom code because formfield_callback does not work with inherited forms.
+        """
         for fieldname, formfield in self.fields.items():
-            # Custom code because formfield_callback does not work with inherited forms
             if formfield:
                 # Assign map widget to all geometry fields
                 try:
-                    formmodel = self._meta.model
+                    formmodel = self.get_form_model()
                     modelfield = formmodel._meta.get_field(fieldname)
                     needs_replace_widget = (isinstance(modelfield, GeometryField)
                                             and not isinstance(formfield.widget, MapWidget))
@@ -122,8 +135,6 @@ class MapEntityForm(TranslatedModelForm):
                 if formfield.widget.__class__ in (forms.widgets.Textarea,
                                                   floppyforms.widgets.Textarea):
                     formfield.widget = TinyMCE()
-
-        self._init_layout()
 
     def _init_layout(self):
         """ Setup form buttons, submit URL, layout
