@@ -3,6 +3,7 @@ L.ObjectsLayer = L.GeoJSON.extend({
         indexing: true,
         highlight: true,
         objectUrl: null,
+        stayBack: false,
         styles: {
             'default': {'color': 'blue', 'weight': 2, 'opacity': 0.8},
             highlight: {'color': 'red', 'weight': 5, 'opacity': 1},
@@ -88,6 +89,23 @@ L.ObjectsLayer = L.GeoJSON.extend({
 
         if (dataurl) {
             this.load(dataurl);
+        }
+    },
+
+    onAdd: function (map) {
+        L.GeoJSON.prototype.onAdd.call(this, map);
+
+        // Optionnally stay below other layers, always.
+        if (this.options.stayBack) {
+            map.on('layeradd', this._stayBackOnAdd, this);
+        }
+    },
+
+    onRemove: function (map) {
+        L.GeoJSON.prototype.onRemove.call(this, map);
+
+        if (this.options.stayBack) {
+            map.off('layeradd', this._stayBackOnAdd, this);
         }
     },
 
@@ -219,6 +237,51 @@ L.ObjectsLayer = L.GeoJSON.extend({
         else {
             layer._defaultStyle = this.options.styles['default'];
             layer.setStyle(layer._defaultStyle);
+        }
+    },
+
+    _stayBackOnAdd: function (e) {
+        //
+        // Make sure this group layer stays below other layers.
+        // With Leaflet 0.8+, it will be a lot **easier**, since we will
+        // be able to assign "panes" by layer.
+        //
+        // This code is quite complex, because a ``layeradd`` event
+        // is triggered for each element of the group layers.
+        //
+
+        // When this layer is added to the map : bring to back
+        if (e.layer === this) {
+            if (!this._map) {
+                return;
+            }
+            if (this.loading) {
+                this.on('loaded', function () {
+                    if (!this._map) {  // Loaded but not on map
+                        return;
+                    }
+                    this.bringToBack();
+                }, this);
+            }
+            else {
+                this.bringToBack();
+            }
+        }
+        else {
+            // When another objectslayer is added to the map : bring to front
+            if (e.layer instanceof L.ObjectsLayer) {
+                if (e.layer.loading) {
+                    e.layer.on('loaded', function () {
+                        if (!e.layer._map) {  // Loaded but not on map
+                            return;
+                        }
+                        e.layer.bringToFront();
+                    });
+                }
+                else {
+                    e.layer.bringToFront();
+                }
+            }
         }
     }
 });
