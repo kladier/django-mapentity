@@ -42,6 +42,10 @@ install process can find GDAL headers::
     $ export CPLUS_INCLUDE_PATH=/usr/include/gdal
     $ export C_INCLUDE_PATH=/usr/include/gdal
 
+Install other required packages::
+
+    $ sudo apt-get install libffi-dev libxml2-dev libxslt1-dev python-dev
+
 Then install the Python packages::
 
     $ pip install -r requirements.txt
