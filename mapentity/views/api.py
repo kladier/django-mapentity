@@ -11,7 +11,7 @@ from ..settings import API_SRID
 from ..decorators import (view_cache_response_content, view_cache_latest,
                           view_permission_required)
 from .. import serializers as mapentity_serializers
-
+from rest_framework_gis.fields import GeometrySerializerMethodField
 from .base import BaseListView
 from .mixins import FilterListMixin, ModelViewMixin, JSONResponseMixin
 
@@ -74,8 +74,16 @@ class MapEntityViewSet(viewsets.ModelViewSet):
     def get_serializer_class(self):
         serializer = super(MapEntityViewSet, self).get_serializer_class()
         renderer, media_type = self.perform_content_negotiation(self.request)
+
         if getattr(renderer, 'format') == 'geojson':
             class Serializer(serializer, GeoFeatureModelSerializer):
-                pass
+                geom = GeometrySerializerMethodField()
+
+                def get_geom(self, obj):
+                    if hasattr(obj, 'geom'):
+                        return obj.geom
+                    else:
+                        return None
+
             return Serializer
         return serializer

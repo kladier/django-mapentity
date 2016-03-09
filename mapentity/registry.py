@@ -118,7 +118,7 @@ class MapEntityOptions(object):
                 serializer_class = _serializer
             rest_viewset = dynamic_viewset
 
-        self.rest_router.register(self.modelname + 's', rest_viewset)
+        self.rest_router.register(self.modelname + 's', rest_viewset, base_name=self.modelname)
 
         # Returns Django URL patterns
         return patterns('', *self.__view_classes_to_url(*picked))
@@ -182,7 +182,7 @@ class Registry(object):
         self.apps = {}
         self.content_type_ids = []
 
-    def register(self, model, options=None, menu=None):
+    def register(self, model, options=None, menu=None, base_name=None):
         """ Register model and returns URL patterns
         """
         from .signals import post_register
