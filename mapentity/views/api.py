@@ -93,4 +93,3 @@ class MapEntityViewSet(viewsets.ModelViewSet):
 
             return Serializer
         return serializer
-
