@@ -75,23 +75,22 @@ class MapEntityViewSet(viewsets.ModelViewSet):
     def get_serializer_class(self):
         serializer = super(MapEntityViewSet, self).get_serializer_class()
         renderer, media_type = self.perform_content_negotiation(self.request)
-        
+
         if getattr(renderer, 'format') == 'geojson':
-            
             class Serializer(serializer, GeoFeatureModelSerializer):
                 def __init__(self, *args, **kwargs):
                     super(Serializer, self).__init__(*args, **kwargs)
                     method_name = 'get_geom'
-                    
+
                     if app_settings['GEOM_FIELD_NAME'] == 'geom':
                         # dont specify method_name when field == geom, get_geom is default and redundant
                         method_name = None
-                    
+
                     self.fields[app_settings['GEOM_FIELD_NAME']] = GeometrySerializerMethodField(method_name)
 
                 def get_geom(self, obj):
                     return getattr(obj, app_settings['GEOM_FIELD_NAME'], None)
-                
+
             return Serializer
-        
         return serializer
+
