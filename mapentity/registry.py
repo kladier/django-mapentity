@@ -118,7 +118,7 @@ class MapEntityOptions(object):
                 serializer_class = _serializer
             rest_viewset = dynamic_viewset
 
-        self.rest_router.register(self.modelname + 's', rest_viewset, base_name=self.modelname)
+        self.rest_router.register(self.modelname + 's', rest_viewset)
 
         # Returns Django URL patterns
         return patterns('', *self.__view_classes_to_url(*picked))
