@@ -254,6 +254,7 @@ def create_mapentity_model_permissions(model):
         permissions.add((codename, _(name)))
 
     ctype = ContentType.objects.db_manager(db).get_for_model(model)
+
     for (codename, name) in permissions:
         p, created = perms_manager.get_or_create(codename=codename,
                                                  content_type=ctype)
@@ -278,8 +279,9 @@ def create_mapentity_model_permissions(model):
 
     attachmenttype = ContentType.objects.db_manager(db).get_for_model(paperclip_models.Attachment)
     read_perm = dict(codename='read_attachment', content_type=attachmenttype)
+
     if not internal_user.user_permissions.filter(**read_perm).exists():
-        permission = perms_manager.get(**read_perm)
+        permission, created = perms_manager.get_or_create(**read_perm)
         internal_user.user_permissions.add(permission)
         logger.info("Added permission %s to internal user %s" % (permission.codename,
                                                                  internal_user))
