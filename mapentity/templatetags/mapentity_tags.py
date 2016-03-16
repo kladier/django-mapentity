@@ -154,7 +154,7 @@ def valuelist(items, field=None, enumeration=False):
     if len(items) > 0:
         oneitem = items[0]
         if hasattr(oneitem, '_meta'):
-            modelname = oneitem._meta.object_name.lower()
+            modelname = oneitem._meta.model_name
 
     return {
         'valuelist': valuelist,
@@ -191,7 +191,7 @@ def valuetable(items, columns='', enumeration=False):
         for column in columns:
             columns_titles.append({'name': column,
                                    'text': field_verbose_name(oneitem, column)})
-        modelname = oneitem._meta.object_name.lower()
+        modelname = oneitem._meta.model_name
     else:
         modelname = None
         columns_titles = None

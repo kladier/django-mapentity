@@ -327,7 +327,7 @@ def name_for(app, modelname, suffix):
 
 
 def smart_get_template(model, suffix):
-    for appname, modelname in [(model._meta.app_label, model._meta.object_name.lower()),
+    for appname, modelname in [(model._meta.app_label, model._meta.model_name),
                                ("mapentity", "override"),
                                ("mapentity", "mapentity")]:
         try:

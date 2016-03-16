@@ -86,7 +86,7 @@ class ModelViewMixin(object):
         if model:
             context['model'] = model
             context['appname'] = model._meta.app_label.lower()
-            context['modelname'] = model._meta.object_name.lower()
+            context['modelname'] = model._meta.model_name
             context['objectname'] = model._meta.verbose_name
             context['objectsname'] = model._meta.verbose_name_plural
         return context

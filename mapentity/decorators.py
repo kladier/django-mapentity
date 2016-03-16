@@ -106,7 +106,7 @@ def view_cache_response_content():
                 if latest_saved:
                     geojson_lookup = '%s_%s_%s_json_layer' % (
                         language,
-                        view_model._meta.object_name.lower(),
+                        view_model._meta.model_name,
                         latest_saved.strftime('%y%m%d%H%M%S%f')
                     )
                 else:
@@ -146,7 +146,7 @@ def save_history():
             model = self.model or self.queryset.model
             history.insert(0, dict(title=unicode(self.get_title()),
                                    path=request.path,
-                                   modelname=unicode(model._meta.object_name.lower())))
+                                   modelname=unicode(model._meta.model_name)))
             if len(history) > app_settings['HISTORY_ITEMS_MAX']:
                 history.pop()
             request.session['history'] = history
