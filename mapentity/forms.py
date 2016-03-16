@@ -76,6 +76,9 @@ class TranslatedModelForm(forms.ModelForm):
                 for field in fields:
                     self.fields[field].initial = getattr(self.instance, field)
 
+    class Meta:
+        fields = "__all__"
+
 
 class SubmitButton(HTML):
 

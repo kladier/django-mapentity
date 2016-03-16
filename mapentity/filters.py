@@ -1,5 +1,4 @@
 from django import forms as django_forms
-from django.db.models.related import RelatedObject
 from django.conf import settings
 
 from django_filters import FilterSet, Filter
@@ -8,6 +7,7 @@ import floppyforms as forms
 
 from .settings import app_settings, API_SRID
 from .widgets import HiddenGeometryWidget
+from django.db.models.fields.related import ForeignObjectRel
 
 
 class PolygonFilter(Filter):
@@ -77,7 +77,7 @@ class BaseMapEntityFilterSet(FilterSet):
     def add_filter(cls, name, filter_=None):
         field = get_model_field(cls._meta.model, name)
         if filter_ is None:
-            if isinstance(field, RelatedObject):
+            if isinstance(field, ForeignObjectRel):
                 filter_ = cls.filter_for_reverse_field(field, name)
             else:
                 filter_ = cls.filter_for_field(field, name)

@@ -40,7 +40,7 @@ class MapEntityOptions(object):
         self.model = model
         self.label = model._meta.verbose_name_plural
         self.app_label = model._meta.app_label
-        self.module_name = model._meta.module_name
+        self.module_name = model._meta.object_name.lower()
         self.modelname = self.module_name
         self.icon = 'images/%s.png' % self.module_name
         self.icon_small = 'images/%s-16.png' % self.module_name
