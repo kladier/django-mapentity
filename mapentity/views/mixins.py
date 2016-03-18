@@ -104,6 +104,8 @@ class FormViewMixin(object):
             class MapEntityAutoForm(MapEntityForm):
                 class Meta:
                     model = _model
+                    fields = "__all__"
+
             self.form_class = MapEntityAutoForm
         return self.form_class
 

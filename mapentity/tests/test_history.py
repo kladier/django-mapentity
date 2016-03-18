@@ -14,6 +14,7 @@ User = get_user_model()
 
 class TestActionsHistory(TestCase):
     def setUp(self):
+        raise Exception('test')
         self.client = Client()
         self.user = User.objects.create_superuser('test', 'email@corp.com', 'booh')
         self.client.login(username='test', password='booh')

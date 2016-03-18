@@ -8,7 +8,7 @@ import csv
 import urllib2
 import json
 from datetime import datetime
-
+from django.db import connections
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.utils.timezone import utc
@@ -240,7 +240,7 @@ class MapEntityTest(TestCase):
 
         obj = self.modelfactory.create()
         list_url = '{api_prefix}{modelname}s.json'.format(api_prefix=self.api_prefix,
-                                                          modelname=self.model._meta.module_name)
+                                                          modelname=self.model._meta.model_name)
         response = self.client.get(list_url)
         self.assertEqual(response.status_code, 200)
         result = json.loads(response.content)
@@ -255,7 +255,7 @@ class MapEntityTest(TestCase):
 
         obj = self.modelfactory.create()
         list_url = '{api_prefix}{modelname}s.geojson'.format(api_prefix=self.api_prefix,
-                                                             modelname=self.model._meta.module_name)
+                                                             modelname=self.model._meta.model_name)
         response = self.client.get(list_url)
         self.assertEqual(response.status_code, 200)
         result = json.loads(response.content)
@@ -272,7 +272,7 @@ class MapEntityTest(TestCase):
 
         obj = self.modelfactory.create()
         detail_url = '{api_prefix}{modelname}s/{id}'.format(api_prefix=self.api_prefix,
-                                                            modelname=self.model._meta.module_name,
+                                                            modelname=self.model._meta.model_name,
                                                             id=obj.pk)
         response = self.client.get(detail_url)
         self.assertEqual(response.status_code, 200)
@@ -286,7 +286,7 @@ class MapEntityTest(TestCase):
 
         obj = self.modelfactory.create()
         detail_url = '{api_prefix}{modelname}s/{id}.geojson'.format(api_prefix=self.api_prefix,
-                                                                    modelname=self.model._meta.module_name,
+                                                                    modelname=self.model._meta.model_name,
                                                                     id=obj.pk)
         response = self.client.get(detail_url)
         self.assertEqual(response.status_code, 200)
@@ -303,6 +303,7 @@ class MapEntityLiveTest(LiveServerTestCase):
     def _pre_setup(self):
         # Workaround https://code.djangoproject.com/ticket/10827
         ContentType.objects.clear_cache()
+
         return super(MapEntityLiveTest, self)._pre_setup()
 
     def url_for(self, path):
