@@ -1,57 +1,48 @@
 # -*- coding: utf-8 -*-
-
 from __future__ import unicode_literals
 
-from django.db import migrations
-import django.contrib.admin.models
+from django.db import migrations, models
 import mapentity.models
+import django.contrib.gis.db.models.fields
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mapentity', '0001_initial'),
     ]
 
     operations = [
-        migrations.RunSQL("""
-                          CREATE TABLE public.mapentity_mushroomspot
-                          (
-                          id serial NOT NULL,
-                          serialized character varying(200),
-                          "number" integer DEFAULT 42,
-                          size double precision DEFAULT 3.14159,
-                          "boolean" boolean NOT NULL DEFAULT true,
-                          name character varying(100) DEFAULT 'Empty'::character varying
-                          );
-                          """),
-        migrations.RunSQL("""
-                          CREATE TABLE public.mapentity_weatherstation
-                          (
-                              id serial NOT NULL,
-                              geom geometry(Point,2154)
-                          );
-                          """),
-        migrations.RunSQL("""
-                          CREATE TABLE public.mapentity_dummymodel
-                          (
-                              id serial NOT NULL,
-                              name character varying(128) DEFAULT ''::character varying,
-                              geom geometry(Point,2154),
-                              date_update date,
-                              public boolean DEFAULT False
-                          );
-                          """),
         migrations.CreateModel(
-            name='LogEntry',
+            name='DummyModel',
             fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(default=b'', max_length=128, blank=True)),
+                ('geom', django.contrib.gis.db.models.fields.PointField(default=None, srid=4326, null=True)),
+                ('date_update', models.DateTimeField(auto_now=True)),
+                ('public', models.BooleanField(default=False)),
             ],
             options={
-                'proxy': True,
+                'verbose_name': 'Dummy Model',
             },
-            bases=(mapentity.models.MapEntityMixin, 'admin.logentry'),
-            managers=[
-                ('objects', django.contrib.admin.models.LogEntryManager()),
+            bases=(mapentity.models.MapEntityMixin, models.Model),
+        ),
+        migrations.CreateModel(
+            name='MushroomSpot',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(default=b'Empty', max_length=100)),
+                ('serialized', models.CharField(default=None, max_length=200, null=True)),
+                ('number', models.IntegerField(default=42, null=True)),
+                ('size', models.FloatField(default=3.14159, null=True)),
+                ('boolean', models.BooleanField(default=True)),
+            ],
+            bases=(mapentity.models.MapEntityMixin, models.Model),
+        ),
+        migrations.CreateModel(
+            name='WeatherStation',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('geom', django.contrib.gis.db.models.fields.PointField(default=None, srid=2154, null=True)),
             ],
         ),
     ]
