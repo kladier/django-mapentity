@@ -12,7 +12,7 @@ django-compressor==1.6
 django-filter==0.13.0
 easy-thumbnails==2.3
 django-tinymce==2.3.0
-django-appypod>=0.0.2
+django-appypod==https://github.com/makinacorpus/django-appypod.git@django1.8_compatibility#egg=django-appypod
 django-leaflet>=0.18
 django-geojson==2.9.0
 djangorestframework-gis==0.10.1
