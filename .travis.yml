@@ -44,7 +44,7 @@ before_script:
 
 script:
  - python demo/manage.py test
- - coverage run --include="demo/*" demo/manage.py tests
+ - coverage run --include="demo/*" demo/manage.py test
 
 after_success:
  - pip install coveralls
