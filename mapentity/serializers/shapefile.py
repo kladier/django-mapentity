@@ -140,7 +140,6 @@ def shape_write(iterable, model, columns, get_geom, geom_type, srid, srid_out=No
                     c = model._meta.get_field(field).verbose_name
 
                 except AttributeError:
-                    # FK and M2M have not verbose_name
                     c = model._meta.get_field(field).name
 
             except FieldDoesNotExist:
