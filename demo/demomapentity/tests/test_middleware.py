@@ -6,11 +6,11 @@ from django.test.utils import override_settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AnonymousUser
 
-from .. import middleware
+from mapentity import middleware
 import mock
 
-from ..middleware import AutoLoginMiddleware, get_internal_user
-from .test_views import DummyModelFactory
+from mapentity.middleware import AutoLoginMiddleware, get_internal_user
+from demo.tests.test_views import DummyModelFactory
 
 
 User = get_user_model()

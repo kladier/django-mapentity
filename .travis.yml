@@ -43,8 +43,8 @@ before_script:
  - flake8 --ignore=E501 mapentity
 
 script:
- - python quicktest.py mapentity
- - coverage run --include="mapentity/*" quicktest.py mapentity
+ - python demo/manage.py tests
+ - coverage run --include="demo/*" demo/manage.py tests
 
 after_success:
  - pip install coveralls

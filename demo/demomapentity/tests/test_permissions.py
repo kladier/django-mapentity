@@ -6,7 +6,7 @@ from mapentity.middleware import get_internal_user
 from mapentity.helpers import user_has_perm
 from mapentity.factories import UserFactory
 
-from .models import DummyModel
+from demo.models import DummyModel
 
 
 class ModelPermissionsTest(TestCase):

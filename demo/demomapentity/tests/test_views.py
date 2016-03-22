@@ -15,9 +15,9 @@ from mapentity.factories import SuperUserFactory
 from mapentity import app_settings
 from mapentity.views import serve_attachment, Convert, JSSettings
 
-from .models import DummyModel
-from .views import DummyList, DummyDetail
-from .test_functional import MapEntityTest, MapEntityLiveTest
+from demo.models import DummyModel
+from demo.views import DummyList, DummyDetail
+from demo.tests.test_functional import MapEntityTest, MapEntityLiveTest
 
 
 User = get_user_model()

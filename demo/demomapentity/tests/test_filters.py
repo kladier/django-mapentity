@@ -5,8 +5,8 @@ from django.contrib.gis.geos import GEOSGeometry
 from django.conf import settings
 
 from mapentity.settings import API_SRID
-from .models import MushroomSpot, WeatherStation
-from ..filters import PythonPolygonFilter, PolygonFilter, MapEntityFilterSet
+from demo.models import MushroomSpot, WeatherStation
+from mapentity.filters import PythonPolygonFilter, PolygonFilter, MapEntityFilterSet
 
 
 class PolygonTest(object):

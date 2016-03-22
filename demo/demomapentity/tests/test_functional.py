@@ -22,9 +22,9 @@ from django.utils import html
 from mock import patch
 import requests
 
-from ..helpers import smart_urljoin
-from ..forms import MapEntityForm
-from ..factories import SuperUserFactory
+from mapentity.helpers import smart_urljoin
+from mapentity.forms import MapEntityForm
+from mapentity.factories import SuperUserFactory
 
 
 @override_settings(MEDIA_ROOT='/tmp/mapentity-media')

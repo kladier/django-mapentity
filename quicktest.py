@@ -89,14 +89,14 @@ class QuickDjangoTest(object):
                 "mapentity.context_processors.settings",
             ),
             TEMPLATE_DIRS=(
-                os.path.join(self.DIRNAME, 'mapentity'),
+                os.path.join(self.DIRNAME, 'demo'),
             ),
             SRID=3857,
             COMPRESS_ENABLED=False,
             TEST=True
         )
-        from django.test.simple import DjangoTestSuiteRunner
-        runner = DjangoTestSuiteRunner()
+        from django.test.runner import DiscoverRunner
+        runner = DiscoverRunner()
         failures = runner.run_tests(self.apps, verbosity=1)
         if failures:  # pragma: no cover
             sys.exit(failures)

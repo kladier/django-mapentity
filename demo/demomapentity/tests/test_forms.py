@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 from mapentity.forms import MapEntityForm
-from .models import DummyModel
+from demo.models import DummyModel
 
 
 class DummyForm(MapEntityForm):

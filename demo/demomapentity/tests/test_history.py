@@ -4,9 +4,9 @@ from django.http import HttpRequest
 from django.test.client import Client
 from django.test import TestCase
 
-from ..models import LogEntry
-from ..views.generic import log_action
-from .models import DummyModel
+from mapentity.models import LogEntry
+from mapentity.views.generic import log_action
+from demo.models import DummyModel
 
 
 User = get_user_model()
@@ -14,7 +14,6 @@ User = get_user_model()
 
 class TestActionsHistory(TestCase):
     def setUp(self):
-        raise Exception('test')
         self.client = Client()
         self.user = User.objects.create_superuser('test', 'email@corp.com', 'booh')
         self.client.login(username='test', password='booh')

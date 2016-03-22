@@ -9,7 +9,7 @@ from django.core.urlresolvers import reverse
 from paperclip.models import Attachment, FileType
 from mapentity.views.generic import MapEntityDetail
 
-from .models import DummyModel
+from demo.tests.models import DummyModel
 
 
 User = get_user_model()

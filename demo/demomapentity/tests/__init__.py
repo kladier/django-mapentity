@@ -1,0 +1,12 @@
+from demo.tests.test_functional import *  # noqa
+from demo.tests.test_middleware import *  # noqa
+from demo.tests.test_views import *  # noqa
+from demo.tests.test_helpers import *  # noqa
+from demo.tests.test_filters import *  # noqa
+from demo.tests.test_forms import *  # noqa
+from demo.tests.test_attachments import *  # noqa
+from demo.tests.test_serializers import *  # noqa
+from demo.tests.test_decorators import *  # noqa
+from demo.tests.test_permissions import *  # noqa
+from demo.tests.test_history import *  # noqa
+from demo.tests.test_templatetags import *  # noqa

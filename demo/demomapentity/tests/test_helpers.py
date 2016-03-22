@@ -3,8 +3,8 @@ import os
 import mock
 from django.test import TestCase
 
-from .. import app_settings
-from ..helpers import (
+from mapentity import app_settings
+from mapentity.helpers import (
     capture_url,
     convertit_url,
     user_has_perm,
