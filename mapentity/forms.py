@@ -228,6 +228,9 @@ class MapEntityForm(TranslatedModelForm):
         )
         return layout
 
+    class Meta:
+        fields = "__all__"
+
 
 class AttachmentForm(BaseAttachmentForm):
     def __init__(self, *args, **kwargs):
