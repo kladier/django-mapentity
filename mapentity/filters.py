@@ -8,10 +8,10 @@ import floppyforms as forms
 from .settings import app_settings, API_SRID
 from .widgets import HiddenGeometryWidget
 try:
-   from django.db.models.related import RelatedObject as ForeignObjectRel
+    from django.db.models.related import RelatedObject as ForeignObjectRel
 except:
-  # django 1.8 +
-  from django.db.models.fields.related import ForeignObjectRel
+    # django 1.8 +
+    from django.db.models.fields.related import ForeignObjectRel
 
 
 class PolygonFilter(Filter):
