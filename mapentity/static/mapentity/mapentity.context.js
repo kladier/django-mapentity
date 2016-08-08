@@ -74,7 +74,7 @@ MapEntity.Context = new function() {
             map.setView(L.latLng(context.mapview.lat, context.mapview.lng), context.mapview.zoom);
             return true;
         } else {
-            map.fitBounds(map.resetviewControl.getBounds());
+            map.fitBounds(map.resetviewControl.getBounds(), {'padding': L.point([20, 20])});
             var maxZoom = $(map._container).data('fitmaxzoom');
             if (map.getZoom() > maxZoom) {
                 console.log('Limited zoom to ', maxZoom, '. Was ', map.getZoom());

@@ -125,7 +125,7 @@ $(window).on('entity:map', function (e, data) {
 
     var mapBounds = $container.data('mapextent');
     if (mapBounds) {
-        map.fitBounds(mapBounds);
+        map.fitBounds(mapBounds, {'padding': L.point([20, 20])});
         var maxZoom = $container.data('fitmaxzoom');
         if (map.getZoom() > maxZoom) {
             console.log('Limited zoom to ', maxZoom, '. Was ', map.getZoom());
