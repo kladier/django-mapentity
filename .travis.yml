@@ -5,6 +5,7 @@ language: python
 python:
  - 2.7
  - 3.5
+ - 3.6
 
 env:
   global:
@@ -18,9 +19,10 @@ env:
 
 install:
  - sudo apt-get update
- - sudo apt-get install -y gdal-bin libgdal1-dev libproj-dev libgeos-dev libspatialite-dev spatialite-bin
+ - sudo apt-get install -y binutils gdal-bin libgdal1-dev libproj-dev libgeos-dev libspatialite-dev
  - pip install -U setuptools
- - pip install sqlite3
+ - pip install pysqlite==2.8.2
+ # - pip install git+git://github.com/tinio/pysqlite.git@extension-enabled#egg=pysqlite
 
    # This is a dependency of our Django quicktest script
  - pip install argparse
