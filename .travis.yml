@@ -18,7 +18,7 @@ env:
 
 install:
  - sudo apt-get update
- - sudo apt-get install -y libgdal1-dev libproj-dev libgeos-dev libspatialite-dev
+ - sudo apt-get install -y libgdal1-dev libproj-dev libgeos-dev libspatialite-dev spatialite-bin
  - pip install -U setuptools
  # - pip install git+git://github.com/tinio/pysqlite.git@extension-enabled#egg=pysqlite
 
