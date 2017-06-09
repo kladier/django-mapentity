@@ -21,7 +21,7 @@ install:
  - sudo apt-get update
  - sudo apt-get install -y binutils gdal-bin libgdal1-dev libproj-dev libgeos-dev libspatialite-dev
  - pip install -U setuptools
- - pip install pysqlite==2.8.2
+ - if [[ $TRAVIS_PYTHON_VERSION == 2.7 ]]; then pip install pysqlite==2.8.2; fi
  # - pip install git+git://github.com/tinio/pysqlite.git@extension-enabled#egg=pysqlite
 
    # This is a dependency of our Django quicktest script
