@@ -123,7 +123,7 @@ class MapEntityFormat(BaseListView, ListView):
             return HttpResponseBadRequest()
 
         filename = '%s-%s-list' % (datetime.now().strftime('%Y%m%d-%H%M'),
-                                   str(slugify(self.get_model()._meta.verbose_name)))
+                                   str(slugify("{}".format(self.get_model()._meta.verbose_name))))
         filename += '.%s' % extensions.get(fmt_str, fmt_str)
         response = formatter(request=self.request, context=context, **response_kwargs)
         response['Content-Disposition'] = 'attachment; filename=%s' % filename
