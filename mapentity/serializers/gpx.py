@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 from django.conf import settings
 from django.core.serializers.base import Serializer
 from django.utils.translation import ugettext_lazy as _
@@ -39,7 +39,7 @@ class GPXSerializer(Serializer):
         """ Single object serialization.
         """
         objtype = unicode(obj.__class__._meta.verbose_name)
-        name = u'[%s] %s' % (objtype, unicode(obj))
+        name = '[%s] %s' % (objtype, obj)
         description = getattr(obj, 'description', '')
         objupdate = obj.get_date_update()
         if objupdate:

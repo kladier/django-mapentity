@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-
+from __future__ import unicode_literals
 from collections import OrderedDict
 import os
 import tempfile
@@ -21,12 +20,15 @@ from osgeo import ogr, osr
 
 from .. import app_settings
 from .helpers import field_as_string
+from django.utils import six
 
-
-try:
-    from cStringIO import StringIO
-except ImportError:
-    from StringIO import StringIO  # noqa
+if six.PY2:
+    try:
+        from cStringIO import StringIO
+    except ImportError:
+        from StringIO import StringIO  # noqa
+else:
+    from io import StringIO
 
 os.environ["SHAPE_ENCODING"] = "UTF-8"
 
@@ -144,7 +146,7 @@ def shape_write(iterable, model, columns, get_geom, geom_type, srid, srid_out=No
             except FieldDoesNotExist:
                 c = _(field.title())
 
-        reponse = unicode(c)
+        reponse = "{}".format(c)
         reponse = unicodedata.normalize('NFD', reponse)
         reponse = smart_str(reponse.encode('ascii', 'ignore')).replace(' ', '_').lower()
 

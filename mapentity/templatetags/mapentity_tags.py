@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 import os
 import datetime
 
@@ -54,7 +56,7 @@ def do_smart_include(parser, token):
 
 @register.filter
 def latlngbounds(obj):
-    if obj is None or isinstance(obj, basestring):
+    if obj is None or isinstance(obj, str):
         return 'null'
     if isinstance(obj, GEOSGeometry):
         extent = obj.extent
@@ -72,7 +74,7 @@ def field_verbose_name(obj, field):
         a = getattr(obj, '%s_verbose_name' % field)
         if a is None:
             raise
-        return unicode(a)
+        return "{}".format(a)
 
 
 @register.simple_tag()
