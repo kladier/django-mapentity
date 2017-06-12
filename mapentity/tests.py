@@ -161,8 +161,8 @@ class MapEntityTest(TestCase):
         fields_errors = form.errors[bad_data.keys()[0]]
         form_errors = to_list(form_error)
         for err in form_errors:
-            self.assertTrue(unicode(err) in fields_errors,
-                            "'%s' not in %s" % (unicode(err), fields_errors))
+            self.assertTrue(err in fields_errors,
+                            "'%s' not in %s" % (err, fields_errors))
 
         response = self.client.post(url, self.get_good_data())
         if response.status_code != 302:

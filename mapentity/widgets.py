@@ -1,11 +1,11 @@
-from django.template.loader import render_to_string
-from django.forms import widgets as django_widgets
-
-from leaflet.forms.widgets import LeafletWidget
 import floppyforms as forms
+from django.forms import widgets as django_widgets
+from django.template.loader import render_to_string
+from django.utils import six
+from leaflet.forms.widgets import LeafletWidget
 
-from .settings import API_SRID
 from .helpers import wkt_to_geom
+from .settings import API_SRID
 
 
 class MapWidget(LeafletWidget):
@@ -30,7 +30,7 @@ class HiddenGeometryWidget(django_widgets.HiddenInput):
         """
         Before serialization, reprojects to API_SRID
         """
-        if value and not isinstance(value, basestring):
+        if value and not isinstance(value, basestring if six.PY2 else str):
             value.transform(API_SRID)
         return value
 
