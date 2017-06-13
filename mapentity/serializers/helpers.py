@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 import json
 from HTMLParser import HTMLParser
 
@@ -37,7 +39,7 @@ def smart_plain_text(s, ascii=False):
         return ''
     try:
         # Converts to unicode, remove HTML tags, convert HTML entities
-        us = plain_text(unicode(s))
+        us = plain_text("{}".format(s))
         if ascii:
             return smart_str(us)
         return us

@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 import os
 import urllib2
 from urlparse import urljoin
@@ -9,6 +11,7 @@ from datetime import datetime
 import json
 import string
 
+from django.utils import six
 from django.utils import timezone
 from django.utils.translation import get_language
 from django.conf import settings
@@ -206,7 +209,7 @@ def convertit_download(url, destination, from_type=None, to_type='application/pd
         return
 
     url = convertit_url(url, from_type, to_type)
-    fd = open(destination, 'wb') if isinstance(destination, basestring) else destination
+    fd = open(destination, 'wb') if isinstance(destination, six.string_types) else destination
     download_to_stream(url, fd, headers=headers)
 
 
