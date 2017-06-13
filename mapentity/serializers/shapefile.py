@@ -28,7 +28,7 @@ if six.PY2:
     except ImportError:
         from StringIO import StringIO  # noqa
 else:
-    from io import StringIO
+    from io import BytesIO as StringIO
 
 os.environ["SHAPE_ENCODING"] = "UTF-8"
 
@@ -206,7 +206,7 @@ def create_shape_format_layer(headers, geom_type, srid, srid_out=None):
     tmp.close()
     # create shape format
 
-    dr = ogr.GetDriverByName('ESRI Shapefile')
+    dr = ogr.GetDriverByName(str('ESRI Shapefile'))
     ds = dr.CreateDataSource(tmp.name)
     if ds is None:
         raise Exception('Could not create file!')
