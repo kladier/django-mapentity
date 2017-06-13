@@ -1,11 +1,19 @@
-# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
 import os
-import md5
+import hashlib
 import time
 import shutil
-import StringIO
+from django.utils import six
+if six.PY2:
+    import StringIO
+else:
+    from io import BytesIO as StringIO
 import csv
-import urllib2
+if six.PY2:
+    import urllib2
+else:
+    from urllib import request as urllib2
 import json
 from datetime import datetime
 
@@ -340,7 +348,7 @@ class MapEntityLiveTest(LiveServerTestCase):
         # Without headers to cache
         lastmodified = response.headers.get('Last-Modified')
         expires = response.headers.get('Expires')
-        md5sum = md5.new(response.content).digest()
+        md5sum = hashlib.new(response.content).digest()
         self.assertNotEqual(lastmodified, None)
         self.assertNotEqual(expires, None)
 
@@ -349,7 +357,7 @@ class MapEntityLiveTest(LiveServerTestCase):
         self.assertEqual(latest, self.model.latest_updated())
         response = self.session.get(geojson_layer_url)
         self.assertEqual(lastmodified, response.headers.get('Last-Modified'))
-        self.assertEqual(md5sum, md5.new(response.content).digest())
+        self.assertEqual(md5sum, hashlib.new(response.content).digest())
 
         # Create a new object
         time.sleep(1.1)  # wait some time, last-modified has precision in seconds

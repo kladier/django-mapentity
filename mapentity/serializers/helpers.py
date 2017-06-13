@@ -1,8 +1,11 @@
 from __future__ import unicode_literals
 
 import json
-from HTMLParser import HTMLParser
-
+from django.utils import six
+if six.PY2:
+    from HTMLParser import HTMLParser
+else:
+    from html.parser import HTMLParser
 from django.core.serializers.json import DateTimeAwareJSONEncoder
 from django.core.serializers import serialize
 from django.db.models.query import QuerySet
