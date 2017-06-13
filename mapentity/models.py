@@ -169,11 +169,11 @@ class MapEntityMixin(object):
     @classmethod
     @models.permalink
     def get_generic_detail_url(cls):
-        return (cls._entity.url_name(ENTITY_DETAIL), [str(0)])
+        return (cls._entity.url_name(ENTITY_DETAIL), ["{}".format(0)])
 
     @models.permalink
     def get_detail_url(self):
-        return (self._entity.url_name(ENTITY_DETAIL), [str(self.pk)])
+        return (self._entity.url_name(ENTITY_DETAIL), ["{}".format(self.pk)])
 
     @property
     def map_image_url(self):
@@ -181,19 +181,19 @@ class MapEntityMixin(object):
 
     @models.permalink
     def get_map_image_url(self):
-        return (self._entity.url_name(ENTITY_MAPIMAGE), [str(self.pk)])
+        return (self._entity.url_name(ENTITY_MAPIMAGE), ["{}".format(self.pk)])
 
     @models.permalink
     def get_document_url(self):
-        return (self._entity.url_name(ENTITY_DOCUMENT), [str(self.pk)])
+        return (self._entity.url_name(ENTITY_DOCUMENT), ["{}".format(self.pk)])
 
     @models.permalink
     def get_update_url(self):
-        return (self._entity.url_name(ENTITY_UPDATE), [str(self.pk)])
+        return (self._entity.url_name(ENTITY_UPDATE), ["{}".format(self.pk)])
 
     @models.permalink
     def get_delete_url(self):
-        return (self._entity.url_name(ENTITY_DELETE), [str(self.pk)])
+        return (self._entity.url_name(ENTITY_DELETE), ["{}".format(self.pk)])
 
     @property
     def attachments(self):

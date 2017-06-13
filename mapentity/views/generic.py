@@ -123,7 +123,7 @@ class MapEntityFormat(BaseListView, ListView):
             return HttpResponseBadRequest()
 
         filename = '%s-%s-list' % (datetime.now().strftime('%Y%m%d-%H%M'),
-                                   str(slugify("{}".format(self.get_model()._meta.verbose_name))))
+                                   slugify("{}".format(self.get_model()._meta.verbose_name)))
         filename += '.%s' % extensions.get(fmt_str, fmt_str)
         response = formatter(request=self.request, context=context, **response_kwargs)
         response['Content-Disposition'] = 'attachment; filename=%s' % filename
@@ -141,7 +141,7 @@ class MapEntityFormat(BaseListView, ListView):
         response = HttpResponse(content_type='application/zip')
         serializer.serialize(queryset=self.get_queryset(), model=self.get_model(),
                              stream=response, fields=self.columns)
-        response['Content-length'] = str(len(response.content))
+        response['Content-length'] = len(response.content)
         return response
 
     def gpx_view(self, request, context, **kwargs):

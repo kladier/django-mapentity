@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 
 import os
 import datetime
-
+from django.utils import six
 from django import template
 from django.conf import settings
 from django.contrib.gis.geos import GEOSGeometry
@@ -56,7 +56,7 @@ def do_smart_include(parser, token):
 
 @register.filter
 def latlngbounds(obj):
-    if obj is None or isinstance(obj, str):
+    if obj is None or isinstance(obj, six.string_types):
         return 'null'
     if isinstance(obj, GEOSGeometry):
         extent = obj.extent
