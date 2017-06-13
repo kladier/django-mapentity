@@ -1,22 +1,16 @@
 from __future__ import unicode_literals
 
-import os
 import hashlib
-import time
+import os
 import shutil
-from django.utils import six
-if six.PY2:
-    import StringIO
-else:
-    from io import BytesIO as StringIO
+import time
 import csv
-if six.PY2:
-    import urllib2
-else:
-    from urllib import request as urllib2
 import json
-from datetime import datetime
+import requests
 
+from django.utils import six
+
+from datetime import datetime
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.utils.timezone import utc
@@ -28,11 +22,20 @@ from django.test.utils import override_settings
 from django.test.testcases import to_list
 from django.utils import html
 from mock import patch
-import requests
 
 from .helpers import smart_urljoin
 from .forms import MapEntityForm
 from .factories import SuperUserFactory
+
+if six.PY2:
+    import StringIO
+else:
+    from io import BytesIO as StringIO
+
+if six.PY2:
+    import urllib2
+else:
+    from urllib import request as urllib2
 
 
 @override_settings(MEDIA_ROOT='/tmp/mapentity-media')
@@ -368,7 +371,7 @@ class MapEntityLiveTest(LiveServerTestCase):
         response = self.session.get(geojson_layer_url)
         # Check that last modified and content changed
         self.assertNotEqual(lastmodified, response.headers.get('Last-Modified'))
-        self.assertNotEqual(md5sum, md5.new(response.content).digest())
+        self.assertNotEqual(md5sum, hashlib.new(response.content).digest())
 
         # Ask again with headers, and expect a 304 status (not changed)
         lastmodified = response.headers.get('Last-Modified')
@@ -380,7 +383,7 @@ class MapEntityLiveTest(LiveServerTestCase):
         response = self.session.get(geojson_layer_url,
                                     headers={'if-modified-since': http_date(1000)})
         self.assertEqual(response.status_code, 200)
-        self.assertNotEqual(md5sum, md5.new(response.content).digest())
+        self.assertNotEqual(md5sum, hashlib.new(response.content).digest())
 
     @patch('mapentity.helpers.requests')
     def test_map_image(self, mock_requests):

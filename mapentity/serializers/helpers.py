@@ -1,20 +1,22 @@
 from __future__ import unicode_literals
 
 import json
+
+from django.core.serializers import serialize
+from django.core.serializers.json import DateTimeAwareJSONEncoder
+from django.db.models.query import QuerySet
 from django.utils import six
+from django.utils.encoding import force_unicode
+from django.utils.encoding import smart_str
+from django.utils.formats import number_format
+from django.utils.functional import Promise, curry
+from django.utils.html import strip_tags
+from django.utils.translation import ugettext_lazy as _
+
 if six.PY2:
     from HTMLParser import HTMLParser
 else:
     from html.parser import HTMLParser
-from django.core.serializers.json import DateTimeAwareJSONEncoder
-from django.core.serializers import serialize
-from django.db.models.query import QuerySet
-from django.utils.formats import number_format
-from django.utils.functional import Promise, curry
-from django.utils.encoding import force_unicode
-from django.utils.encoding import smart_str
-from django.utils.html import strip_tags
-from django.utils.translation import ugettext_lazy as _
 
 
 def field_as_string(obj, field, ascii=False):
