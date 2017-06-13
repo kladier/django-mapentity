@@ -1,31 +1,35 @@
 from __future__ import unicode_literals
 
-import os
-import urllib2
-from urlparse import urljoin
 import itertools
-import logging
-import urllib
-from mimetypes import types_map
-from datetime import datetime
 import json
+import logging
+import os
 import string
-
-from django.utils import six
-from django.utils import timezone
-from django.utils.translation import get_language
-from django.conf import settings
-from django.contrib.gis.gdal.error import OGRException
-from django.contrib.gis.geos import GEOSException, fromstr
-from django.template.base import TemplateDoesNotExist
-from django.http import HttpResponse
-from django.core.urlresolvers import resolve
-from django.template.loader import get_template
+import urllib
+from datetime import datetime
+from mimetypes import types_map
 
 import bs4
 import requests
+from django.conf import settings
+from django.contrib.gis.gdal.error import OGRException
+from django.contrib.gis.geos import GEOSException, fromstr
+from django.core.urlresolvers import resolve
+from django.http import HttpResponse
+from django.template.base import TemplateDoesNotExist
+from django.template.loader import get_template
+from django.utils import six
+from django.utils import timezone
+from django.utils.translation import get_language
 
 from .settings import app_settings, API_SRID
+
+if six.PY2:
+    import urllib2
+    from urlparse import urljoin
+else:
+    import urllib.request as urllib2
+    from urllib.parse import urljoin
 
 logger = logging.getLogger(__name__)
 
