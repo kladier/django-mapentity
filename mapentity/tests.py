@@ -16,7 +16,6 @@ from django.contrib.contenttypes.models import ContentType
 from django.utils.timezone import utc
 from django.utils.http import http_date
 from django.utils.translation import ugettext_lazy as _
-from django.utils.encoding import force_unicode
 from django.test import TestCase, LiveServerTestCase
 from django.test.utils import override_settings
 from django.test.testcases import to_list
@@ -156,7 +155,7 @@ class MapEntityTest(TestCase):
         for line in lines:
             for col in line:
                 # the col should not contains any html tags
-                self.assertEquals(force_unicode(col), html.strip_tags(force_unicode(col)))
+                self.assertEquals("{}".format(col), html.strip_tags("{}".format(col)))
 
     def _post_form(self, url):
         # no data
