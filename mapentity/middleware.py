@@ -1,5 +1,6 @@
 import logging
-from urlparse import urlparse
+from django.utils import six
+
 from subprocess import check_output
 
 from django.conf import settings
@@ -9,6 +10,10 @@ from django.db import DatabaseError
 
 from . import app_settings
 
+if six.PY2:
+    from urlparse import urlparse
+else:
+    from urllib.parser import urlparse
 
 logger = logging.getLogger(__name__)
 
