@@ -7,7 +7,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpRequest
 from django.test import TransactionTestCase
 
-from mapentity import app_settings
+from mapentity.settings import app_settings
 from mapentity.decorators import view_permission_required
 
 

@@ -13,7 +13,7 @@ from django.core.management import call_command
 from django.test import TransactionTestCase, RequestFactory
 from django.test.utils import override_settings
 
-from mapentity import app_settings
+from mapentity.settings import app_settings
 from mapentity.factories import SuperUserFactory
 from mapentity.tests import MapEntityTest, MapEntityLiveTest
 from mapentity.views import serve_attachment, Convert, JSSettings
