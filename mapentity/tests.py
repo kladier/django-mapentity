@@ -26,10 +26,7 @@ from .helpers import smart_urljoin
 from .forms import MapEntityForm
 from .factories import SuperUserFactory
 
-if six.PY2:
-    import StringIO
-else:
-    from io import BytesIO as StringIO
+from django.utils.six import StringIO
 
 if six.PY2:
     import urllib2
@@ -147,7 +144,7 @@ class MapEntityTest(TestCase):
         self.assertEqual(response.get('Content-Type'), 'text/csv')
 
         # Read the csv
-        lines = list(csv.reader(StringIO.StringIO(response.content), delimiter=','))
+        lines = list(csv.reader(StringIO.StringIO(response.content), delimiter=b','))
 
         # There should be one more line in the csv than in the items: this is the header line
         self.assertEqual(len(lines), self.model.objects.all().count() + 1)
