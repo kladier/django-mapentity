@@ -19,6 +19,7 @@ if six.PY2:
 else:
     from io import BytesIO as StringIO
 
+
 class ShapefileSerializer(TransactionTestCase):
     def setUp(self):
         self.point1 = MushroomSpot.objects.create(serialized='SRID=%s;POINT(0 0)' % settings.SRID)
