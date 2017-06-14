@@ -2,8 +2,8 @@ from __future__ import unicode_literals
 
 from django.conf import settings as settings_  # import the settings file
 
-from .settings import app_settings\
 from . import registry
+from .settings import app_settings
 
 
 def settings(request):
