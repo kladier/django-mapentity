@@ -250,7 +250,7 @@ class MapEntityTest(TestCase):
                                                           modelname=self.model._meta.model_name)
         response = self.client.get(list_url)
         self.assertEqual(response.status_code, 200)
-        result = json.loads(response.content)
+        result = json.loads(response.content.decode('utf-8'))
         self.assertEqual(len(result), 1)
         first_result = result[0]
         self.assertEqual(first_result['id'], obj.pk)
@@ -265,7 +265,7 @@ class MapEntityTest(TestCase):
                                                              modelname=self.model._meta.model_name)
         response = self.client.get(list_url)
         self.assertEqual(response.status_code, 200)
-        result = json.loads(response.content)
+        result = json.loads(response.content.decode('utf-8'))
         self.assertEqual(result['type'], 'FeatureCollection')
         self.assertEqual(len(result['features']), 1)
         first_result = result['features'][0]
@@ -283,7 +283,7 @@ class MapEntityTest(TestCase):
                                                             id=obj.pk)
         response = self.client.get(detail_url)
         self.assertEqual(response.status_code, 200)
-        result = json.loads(response.content)
+        result = json.loads(response.content.decode('utf-8'))
         self.assertEqual(result['id'], obj.pk)
 
     def test_api_geojson_detail_for_model(self):
@@ -297,7 +297,7 @@ class MapEntityTest(TestCase):
                                                                     id=obj.pk)
         response = self.client.get(detail_url)
         self.assertEqual(response.status_code, 200)
-        result = json.loads(response.content)
+        result = json.loads(response.content.decode('utf-8'))
         self.assertEqual(result['id'], obj.pk)
 
 
