@@ -144,7 +144,7 @@ class MapEntityTest(TestCase):
         self.assertEqual(response.get('Content-Type'), 'text/csv')
 
         # Read the csv
-        lines = list(csv.reader(StringIO.StringIO(response.content), delimiter=b','))
+        lines = list(csv.reader(StringIO(response.content), delimiter=b','))
 
         # There should be one more line in the csv than in the items: this is the header line
         self.assertEqual(len(lines), self.model.objects.all().count() + 1)
@@ -165,7 +165,7 @@ class MapEntityTest(TestCase):
 
         form = self.get_form(response)
 
-        fields_errors = form.errors[bad_data.keys()[0]]
+        fields_errors = form.errors[list(bad_data.keys())[0]]
         form_errors = to_list(form_error)
         for err in form_errors:
             self.assertTrue(err in fields_errors,

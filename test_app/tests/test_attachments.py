@@ -64,7 +64,7 @@ class EntityAttachmentTestCase(TransactionTestCase):
         self.client.login(username='howard', password='booh')
         response = self.client.get('/dummymodel/{pk}/'.format(pk=self.object.pk))
 
-        html = response.content
+        html = response.content.decode('utf-8')
         self.assertTemplateUsed(response, template_name='paperclip/attachment_list.html')
 
         self.assertEqual(1, len(get_attachment_model().objects.attachments_for_object(self.object)))
