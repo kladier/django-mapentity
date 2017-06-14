@@ -1,19 +1,18 @@
 import logging
-from django.utils import six
-
 from subprocess import check_output
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.signals import user_logged_in
 from django.db import DatabaseError
+from django.utils import six
 
 from . import app_settings
 
 if six.PY2:
     from urlparse import urlparse
 else:
-    from urllib.parser import urlparse
+    from urllib.parse import urlparse
 
 logger = logging.getLogger(__name__)
 

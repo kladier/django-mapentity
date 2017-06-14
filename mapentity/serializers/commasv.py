@@ -1,11 +1,12 @@
 from __future__ import unicode_literals
+
 import csv
 from functools import partial
 
 from django.core.serializers.base import Serializer
+from django.db.models.fields.related import ForeignKey, ManyToManyField, FieldDoesNotExist
 from django.utils.encoding import smart_str
 from django.utils.translation import ugettext_lazy as _
-from django.db.models.fields.related import ForeignKey, ManyToManyField, FieldDoesNotExist
 
 from .helpers import smart_plain_text, field_as_string
 
@@ -23,7 +24,7 @@ class CSVSerializer(Serializer):
 
         headers = []
         for field in columns:
-            c = getattr(model, '%s_verbose_name' % field, None)
+            c = getattr(model, '{}_verbose_name'.format(field), None)
             if c is None:
                 try:
                     f = model._meta.get_field(field)
