@@ -9,7 +9,7 @@ from django.contrib.auth.signals import user_logged_in
 from django.db import DatabaseError
 from django.utils import six
 
-from . import app_settings
+from .settings import app_settings
 
 if six.PY2:
     from urlparse import urlparse

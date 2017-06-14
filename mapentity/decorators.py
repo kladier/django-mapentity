@@ -13,7 +13,7 @@ from django.views.decorators.http import last_modified as cache_last_modified
 from django.views.generic.detail import BaseDetailView
 from django.views.generic.edit import BaseUpdateView
 
-from . import app_settings
+from .settings import app_settings
 from . import models as mapentity_models
 from .helpers import user_has_perm
 
