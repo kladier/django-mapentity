@@ -13,7 +13,7 @@ django-filter==1.0.1
 easy-thumbnails==1.4
 django-tinymce==2.4.0
 #django-appypod==1.0.0
--e git+https://github.com/makinacorpus/django-appypod.git@d33d8c927d53410eec64f66c5b1799497f8a17b6#egg=django-appypod
+-e git+https://github.com/makinacorpus/django-appypod.git@test_py3#egg=django-appypod
 django-leaflet==0.19.0
 django-geojson==2.10.0
 djangorestframework-gis==0.11
