@@ -1,18 +1,17 @@
+from __future__ import unicode_literals
+
+import mock
 from django.conf import settings
+from django.contrib.auth import get_user_model
+from django.contrib.auth.models import AnonymousUser
 from django.core.management import call_command
 from django.test import TransactionTestCase
 from django.test.client import RequestFactory
 from django.test.utils import override_settings
 
-from django.contrib.auth import get_user_model
-from django.contrib.auth.models import AnonymousUser
-
 from mapentity import middleware
 from mapentity.middleware import AutoLoginMiddleware, get_internal_user
-import mock
-
 from .test_views import DummyModelFactory
-
 
 User = get_user_model()
 

@@ -1,7 +1,8 @@
+from __future__ import unicode_literals
+
 from collections import OrderedDict
 
 from django.conf import settings
-
 
 API_SRID = 4326
 

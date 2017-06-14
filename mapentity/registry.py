@@ -1,26 +1,26 @@
-import re
-from importlib import import_module
+from __future__ import unicode_literals
+
 import inspect
 import logging
+import re
 from collections import OrderedDict
+from importlib import import_module
 
-from django.db.utils import ProgrammingError
-from django.db import DEFAULT_DB_ALIAS
-from django.utils.translation import ugettext as _
-from django.views.generic.base import View
 from django.conf.urls import patterns, url, include
-from django.contrib.contenttypes.models import ContentType
 from django.contrib import auth
 from django.contrib.auth.models import Permission
-
+from django.contrib.contenttypes.models import ContentType
+from django.db import DEFAULT_DB_ALIAS
+from django.db.utils import ProgrammingError
+from django.utils.translation import ugettext as _
+from django.views.generic.base import View
+from paperclip.settings import get_attachment_model
 from rest_framework import routers as rest_routers
 from rest_framework import serializers as rest_serializers
+
+from mapentity import app_settings
 from mapentity import models as mapentity_models
 from mapentity.middleware import get_internal_user
-from mapentity import app_settings
-
-from paperclip.settings import get_attachment_model
-
 
 logger = logging.getLogger(__name__)
 

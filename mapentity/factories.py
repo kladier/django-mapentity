@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 import factory
 
 from django.contrib.auth import get_user_model

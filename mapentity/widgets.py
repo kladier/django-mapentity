@@ -3,8 +3,9 @@ from __future__ import unicode_literals
 import floppyforms as forms
 from django.forms import widgets as django_widgets
 from django.template.loader import render_to_string
-from leaflet.forms.widgets import LeafletWidget
 from django.utils import six
+from leaflet.forms.widgets import LeafletWidget
+
 from .helpers import wkt_to_geom
 from .settings import API_SRID
 

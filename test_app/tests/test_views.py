@@ -1,27 +1,24 @@
 from __future__ import unicode_literals
 
+import json
 import os
 import shutil
-import json
 
-import mock
 import factory
+import mock
 from django.conf import settings
+from django.contrib.auth import get_user_model
+from django.contrib.auth.models import Permission
 from django.core.management import call_command
 from django.test import TransactionTestCase, RequestFactory
 from django.test.utils import override_settings
-from django.contrib.auth import get_user_model
-from django.contrib.auth.models import Permission
-
-from mapentity.factories import SuperUserFactory
 
 from mapentity import app_settings
+from mapentity.factories import SuperUserFactory
 from mapentity.tests import MapEntityTest, MapEntityLiveTest
 from mapentity.views import serve_attachment, Convert, JSSettings
-
 from ..models import DummyModel
 from ..views import DummyList, DummyDetail
-
 
 User = get_user_model()
 

@@ -1,13 +1,15 @@
+from __future__ import unicode_literals
+
 import logging
 
 from django.contrib.gis.db.models import GeometryField
 from django.http import HttpResponse, HttpResponseNotFound
 from django.views.decorators.http import last_modified as cache_last_modified
-from ..forms import MapEntityForm
-from ..filters import MapEntityFilterSet
-from ..serializers import json_django_dumps
-from .. import registry
 
+from .. import registry
+from ..filters import MapEntityFilterSet
+from ..forms import MapEntityForm
+from ..serializers import json_django_dumps
 
 logger = logging.getLogger(__name__)
 

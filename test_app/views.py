@@ -1,5 +1,6 @@
-from mapentity import views as mapentity_views
+from __future__ import unicode_literals
 
+from mapentity import views as mapentity_views
 from .models import DummyModel
 
 

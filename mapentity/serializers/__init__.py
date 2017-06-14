@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 from .helpers import json_django_dumps, plain_text, smart_plain_text
 from .commasv import CSVSerializer
 from .gpx import GPXSerializer

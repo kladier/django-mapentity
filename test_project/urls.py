@@ -1,11 +1,12 @@
+from __future__ import unicode_literals
+
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.views.generic import RedirectView
 
+from mapentity import registry
 from test_app.models import DummyModel, MushroomSpot
 from test_app.views import DummyDocumentOdt, DummyDocumentWeasyprint
-from mapentity import registry
-
 
 handler403 = 'mapentity.views.handler403'
 

@@ -1,10 +1,11 @@
-from django import forms as django_forms
-from django.db.models.fields.related import ManyToOneRel
-from django.conf import settings
+from __future__ import unicode_literals
 
+import floppyforms as forms
+from django import forms as django_forms
+from django.conf import settings
+from django.db.models.fields.related import ManyToOneRel
 from django_filters import FilterSet, Filter
 from django_filters.filterset import get_model_field
-import floppyforms as forms
 
 from .settings import app_settings, API_SRID
 from .widgets import HiddenGeometryWidget

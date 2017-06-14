@@ -1,9 +1,10 @@
 from __future__ import unicode_literals
-from collections import OrderedDict
+
 import os
 import tempfile
 import unicodedata
 import zipfile
+from collections import OrderedDict
 
 from django.contrib.gis.db.models.fields import (GeometryField, GeometryCollectionField,
                                                  PointField, LineStringField,
@@ -13,14 +14,13 @@ from django.contrib.gis.geos import Point, LineString, MultiPoint, MultiLineStri
 from django.contrib.gis.geos.collections import GeometryCollection
 from django.core.serializers.base import Serializer
 from django.db.models.fields.related import FieldDoesNotExist
+from django.utils import six
 from django.utils.encoding import smart_str
 from django.utils.translation import ugettext as _
-
 from osgeo import ogr, osr
 
-from .. import app_settings
 from .helpers import field_as_string
-from django.utils import six
+from .. import app_settings
 
 if six.PY2:
     try:

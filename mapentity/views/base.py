@@ -1,37 +1,41 @@
-# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
+import json
+import logging
+import mimetypes
 import os
 import sys
-import urllib2
-import logging
 import traceback
 from datetime import datetime
-import json
-import mimetypes
 
+from django.apps import apps
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.gis.db.models import GeometryField
-from django.http import (HttpResponse, HttpResponseBadRequest,
-                         HttpResponseServerError, Http404)
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
+from django.http import (HttpResponse, HttpResponseBadRequest,
+                         HttpResponseServerError, Http404)
+from django.shortcuts import get_object_or_404
+from django.template import RequestContext, Context, loader
+from django.utils import six
+from django.views import static
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_http_methods
 from django.views.defaults import page_not_found, permission_denied
 from django.views.generic.base import TemplateView
-from django.views import static
-from django.views.decorators.http import require_http_methods
-from django.views.decorators.csrf import csrf_exempt
-from django.template import RequestContext, Context, loader
-from django.shortcuts import get_object_or_404
-from django.apps import apps
-
-from ..decorators import view_permission_required
-from ..settings import app_settings, _MAP_STYLES
-from ..helpers import capture_image
-from .mixins import JSONResponseMixin, FilterListMixin, ModelViewMixin
-
-from mapentity import models as mapentity_models
 from paperclip.settings import get_attachment_permission
 
+from mapentity import models as mapentity_models
+from .mixins import JSONResponseMixin, FilterListMixin, ModelViewMixin
+from ..decorators import view_permission_required
+from ..helpers import capture_image
+from ..settings import app_settings, _MAP_STYLES
+
+if six.PY2:
+    import urllib2
+else:
+    from urllib import request as urllib2
 
 logger = logging.getLogger(__name__)
 

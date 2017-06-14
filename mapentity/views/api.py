@@ -1,20 +1,19 @@
+from __future__ import unicode_literals
+
 import logging
 
 from django.views.generic.list import ListView
-
 from djgeojson.views import GeoJSONLayerView
 from rest_framework import viewsets
 from rest_framework_gis.serializers import GeoFeatureModelSerializer
 
 from mapentity import models as mapentity_models
-from ..settings import API_SRID
-from ..decorators import (view_cache_response_content, view_cache_latest,
-                          view_permission_required)
-from .. import serializers as mapentity_serializers
-
 from .base import BaseListView
 from .mixins import FilterListMixin, ModelViewMixin, JSONResponseMixin
-
+from .. import serializers as mapentity_serializers
+from ..decorators import (view_cache_response_content, view_cache_latest,
+                          view_permission_required)
+from ..settings import API_SRID
 
 logger = logging.getLogger(__name__)
 

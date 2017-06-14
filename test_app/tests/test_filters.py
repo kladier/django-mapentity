@@ -1,11 +1,12 @@
+from __future__ import unicode_literals
+
+from django.conf import settings
+from django.contrib.gis.geos import GEOSGeometry
+from django.test import TransactionTestCase
 from django_filters import CharFilter
 
-from django.test import TransactionTestCase
-from django.contrib.gis.geos import GEOSGeometry
-from django.conf import settings
-
-from mapentity.settings import API_SRID
 from mapentity.filters import PythonPolygonFilter, PolygonFilter, MapEntityFilterSet
+from mapentity.settings import API_SRID
 from ..models import MushroomSpot, WeatherStation
 
 

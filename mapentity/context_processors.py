@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 from django.conf import settings as settings_  # import the settings file
 
 from . import app_settings, registry

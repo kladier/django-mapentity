@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 from django.conf import settings
 from django.conf.urls import url, include
 
@@ -5,6 +7,7 @@ from . import app_settings
 from . import registry
 from .views import (map_screenshot, history_delete,
                     serve_attachment, JSSettings, Convert)
+
 if app_settings['ACTION_HISTORY_ENABLED']:
     from .models import LogEntry
 

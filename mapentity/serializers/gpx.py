@@ -1,14 +1,14 @@
 from __future__ import unicode_literals
-from django.conf import settings
-from django.core.serializers.base import Serializer
-from django.utils.translation import ugettext_lazy as _
-from django.contrib.gis.geos.collections import GeometryCollection
-from django.contrib.gis.geos import Point, LineString
 
 import gpxpy.gpx
+from django.conf import settings
+from django.contrib.gis.geos import Point, LineString
+from django.contrib.gis.geos.collections import GeometryCollection
+from django.core.serializers.base import Serializer
+from django.utils.translation import ugettext_lazy as _
 
-from ..templatetags.mapentity_tags import humanize_timesince
 from .. import app_settings
+from ..templatetags.mapentity_tags import humanize_timesince
 
 
 class GPXSerializer(Serializer):

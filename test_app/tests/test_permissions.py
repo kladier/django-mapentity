@@ -1,12 +1,13 @@
-from django.core.management import call_command
-from django.test import TransactionTestCase
+from __future__ import unicode_literals
+
 from django.contrib.auth.models import Permission
 from django.contrib.contenttypes.models import ContentType
+from django.core.management import call_command
+from django.test import TransactionTestCase
 
-from mapentity.middleware import get_internal_user
-from mapentity.helpers import user_has_perm
 from mapentity.factories import UserFactory
-
+from mapentity.helpers import user_has_perm
+from mapentity.middleware import get_internal_user
 from ..models import DummyModel
 
 
@@ -20,11 +21,11 @@ class ModelPermissionsTest(TransactionTestCase):
     def test_model_permissions_were_created(self):
         permissions = Permission.objects.filter(content_type=self.ctype)
         all_codenames = permissions.values_list('codename', flat=True)
-        self.assertItemsEqual(all_codenames, [u'add_dummymodel',
-                                              u'change_dummymodel',
-                                              u'delete_dummymodel',
-                                              u'export_dummymodel',
-                                              u'read_dummymodel'])
+        self.assertItemsEqual(all_codenames, ['add_dummymodel',
+                                              'change_dummymodel',
+                                              'delete_dummymodel',
+                                              'export_dummymodel',
+                                              'read_dummymodel'])
 
     def test_internal_user_has_necessary_permissions(self):
         internal_user = get_internal_user()

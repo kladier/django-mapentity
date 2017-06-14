@@ -1,10 +1,12 @@
-# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
 import django_filters
 from django import forms
+
 from .generic import MapEntityList
+from .. import registry
 from ..filters import BaseMapEntityFilterSet
 from ..models import LogEntry
-from .. import registry
 
 
 class LogEntryFilter(BaseMapEntityFilterSet):
